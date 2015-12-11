@@ -9,6 +9,7 @@ body {
     background: url('../img/cat-on-amp.jpg') no-repeat fixed;
     background-size: cover;
     font-family: 'Noto Sans', sans-serif;
+    color: #696562;
 }
 .main {
     background-color: rgba(255,255,255,.8);
@@ -19,7 +20,6 @@ h1 {
 p {
     font-size: 1em;
     line-height: 1.6em;
-    color: #696562;
 }
 img {
     max-width: 100%;
@@ -46,8 +46,20 @@ img {
  *MODULES
  **********************/
 .modal {
-    background-color: #d88888;
+    background-color: rgba(216, 136, 136, .9);
     padding: 2em;
+}
+.clicks {
+    color: #ffffff;
+    text-align: center;
+}
+.clicks__count {
+    font-size: 5em;
+    margin: 0;
+}
+.clicks__label {
+    text-transform: uppercase;
+    margin-bottom: 0;
 }
 
 /**********************
