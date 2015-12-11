@@ -1,0 +1,70 @@
+/**********************
+ *BASE
+ **********************/
+* {
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background: url('../img/cat-on-amp.jpg') no-repeat fixed;
+    background-size: cover;
+    font-family: 'Noto Sans', sans-serif;
+}
+.main {
+    background-color: rgba(255,255,255,.8);
+}
+h1 {
+    color: #d88888;
+}
+p {
+    font-size: 1em;
+    line-height: 1.6em;
+    color: #696562;
+}
+img {
+    max-width: 100%;
+}
+
+/**********************
+ *LAYOUT
+ **********************/
+.main-container {
+    padding: 2em;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 960em;
+    margin: 0 auto;
+    padding: 5em;
+}
+[class*='flex-item'] {
+    margin-bottom: 2em;
+}
+
+/**********************
+ *MODULES
+ **********************/
+.modal {
+    background-color: #d88888;
+    padding: 2em;
+}
+
+/**********************
+ *STATE
+ **********************/
+
+/**********************
+ *MEDIA QUERIES
+ **********************/
+@media screen and (min-width: 768px) {
+    [class*='flex-item']:last-child {
+        margin-left: 2em;
+    }
+    .flex-item--1-3 {
+        width: calc(33.33% - 1em);
+    }
+    .flex-item--2-3 {
+        width: calc(66.67% - 1em);
+    }
+}
