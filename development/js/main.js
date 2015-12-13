@@ -6,16 +6,30 @@ $(function() {
             {
                 'image' : 'img/cat-on-amp.jpg',
                 'alt' : 'An adorable tabby kitty on an amp',
-                'name' : 'Ampelina'
+                'name' : 'Ampersand'
             },
             {
                 'image' : 'img/cat-on-floor.jpg',
                 'alt' : 'A cute orange kitty on the floor',
                 'name' : 'Floora'
+            },
+            {
+                'image' : 'img/cat-on-wood.jpg',
+                'alt' : 'A fluffy tabby lying on weathered woodboards',
+                'name' : 'Aslan'
+            },
+            {
+                'image' : 'img/cat-on-chair.jpg',
+                'alt' : 'A fluffy Siamese kitty on a wooden chair',
+                'name' : 'Queen Fluffipants'
+            },
+            {
+                'image' : 'img/cat-behind-window.jpg',
+                'alt' : 'A sneaky grey and white kitty behind a window shade',
+                'name' : 'Le Sneeque'
             }
         ]
     }
-    console.log(cats.cats.length);
 
     //Append cats to page
     for (i = 0; i < cats.cats.length; i++) {
