@@ -19,7 +19,7 @@ $(function() {
 
     //Append cats to page
     for (i = 0; i < cats.cats.length; i++) {
-        $('#cat-container').append('<div class="cat flex-item--1-2"><p class="catname">' + cats.cats[i].name + '</p><img class="catimage" src="' + cats.cats[i].image + '" alt="' + cats.cats[i].alt + '"></div>');
+        $('#cat-container').append('<div class="cat flex-item--1-2"><img class="catimage" src="' + cats.cats[i].image + '" alt="' + cats.cats[i].alt + '"><div class="catname modal">' + cats.cats[i].name + '</div></div>');
     }
 
     // Count clicks
