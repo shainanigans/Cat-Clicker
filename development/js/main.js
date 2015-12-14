@@ -6,27 +6,32 @@ $(function() {
             {
                 'image' : 'img/cat-on-amp.jpg',
                 'alt' : 'An adorable tabby kitty on an amp',
-                'name' : 'Ampersand'
+                'name' : 'Ampersand',
+                'clicks' : 0
             },
             {
                 'image' : 'img/cat-on-floor.jpg',
                 'alt' : 'A cute orange kitty on the floor',
-                'name' : 'Floora'
+                'name' : 'Floora',
+                'clicks' : 0
             },
             {
                 'image' : 'img/cat-on-wood.jpg',
                 'alt' : 'A fluffy tabby lying on weathered woodboards',
-                'name' : 'Aslan'
+                'name' : 'Aslan',
+                'clicks' : 0
             },
             {
                 'image' : 'img/cat-on-chair.jpg',
                 'alt' : 'A fluffy Siamese kitty on a wooden chair',
-                'name' : 'Queen Fluffipants'
+                'name' : 'Queen Fluffipants',
+                'clicks' : 0
             },
             {
                 'image' : 'img/cat-behind-window.jpg',
                 'alt' : 'A sneaky grey and white kitty behind a window shade',
-                'name' : 'Le Sneeque'
+                'name' : 'Le Sneeque',
+                'clicks' : 0
             }
         ]
     }
@@ -49,18 +54,20 @@ $(function() {
                 }
 
                 // Add the new cat
-                $('#cat-container').append('<div class="cat cat-main"><img class="catimage" src="' + catCopy.image + '" alt="' + catCopy.alt + '"><div class="catname modal">' + catCopy.name + '</div></div>');
+                $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main"><img class="catimage" src="' + catCopy.image + '" alt="' + catCopy.alt + '"><div class="catname modal">' + catCopy.name + '</div></div>');
+            }
+        })(cat));
+
+        // Count clicks
+        $('#cat-main' + i).click((function(catCopy) {
+            return function() {
+                console.log('why aren\'t these being counted?');
+                // Increment by one each click
+                catCopy.clicks++;
+                // Remove old count and append new count to page
+                $('.clicks__count').text('').append(catCopy.clicks);
             }
         })(cat));
     }
-
-    // Count clicks
-    var clicks = 0;
-    $('.catimage').click(function() {
-        // Increment by one each click
-        clicks++;
-        // Remove old count and append new count to page
-        $('.clicks__count').text('').append(clicks);
-    });
 
 })
