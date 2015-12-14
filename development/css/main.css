@@ -43,6 +43,7 @@ img {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 [class*='flex-item'] {
     margin-bottom: 2em;
@@ -92,9 +93,6 @@ a:hover {
  *MEDIA QUERIES
  **********************/
 @media screen and (min-width: 768px) {
-    [class*='flex-item']:last-child {
-        margin-left: 2em;
-    }
     .flex-item--1-2 {
         width: calc(50% - 1em);
     }
