@@ -42,7 +42,7 @@ $(function() {
         var cat = cats.cats[i];
 
         // Append cats to page
-        $('#cat-selector').append('<div class="cat flex-item" id="cat' + i + '"><img src="' + cat.image + '" alt="' + cat.alt + '"><div class="catname modal">' + cat.name + '</div></div>');
+        $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cat.name + '</p></a>');
 
         // Add cats to main cat div when clicked
         $('#cat' + i).click((function(catCopy) {
@@ -60,6 +60,7 @@ $(function() {
 
         // Count clicks
         $('#cat-main' + i).click((function(catCopy) {
+            // Closure
             return function() {
                 console.log('why aren\'t these being counted?');
                 // Increment by one each click
