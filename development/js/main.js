@@ -31,9 +31,27 @@ $(function() {
         ]
     }
 
-    //Append cats to page
+    // Append and make cats clickable
     for (i = 0; i < cats.cats.length; i++) {
-        $('#cat-container').append('<div class="cat flex-item--1-2"><img class="catimage" src="' + cats.cats[i].image + '" alt="' + cats.cats[i].alt + '"><div class="catname modal">' + cats.cats[i].name + '</div></div>');
+        // Variables for functions
+        var cat = cats.cats[i];
+
+        // Append cats to page
+        $('#cat-selector').append('<div class="cat flex-item" id="cat' + i + '"><img src="' + cat.image + '" alt="' + cat.alt + '"><div class="catname modal">' + cat.name + '</div></div>');
+
+        // Add cats to main cat div when clicked
+        $('#cat' + i).click((function(catCopy) {
+            // Closure
+            return function() {
+                // Remove a cat if there's already one
+                if ($('.cat-main')) {
+                    $('.cat-main').detach();
+                }
+
+                // Add the new cat
+                $('#cat-container').append('<div class="cat cat-main"><img class="catimage" src="' + catCopy.image + '" alt="' + catCopy.alt + '"><div class="catname modal">' + catCopy.name + '</div></div>');
+            }
+        })(cat));
     }
 
     // Count clicks
