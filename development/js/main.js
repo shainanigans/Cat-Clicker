@@ -6,32 +6,27 @@ $(function() {
             {
                 'image' : 'img/cat-on-amp.jpg',
                 'alt' : 'An adorable tabby kitty on an amp',
-                'name' : 'Ampersand',
-                'clicks' : 0
+                'name' : 'Ampersand'
             },
             {
                 'image' : 'img/cat-on-floor.jpg',
                 'alt' : 'A cute orange kitty on the floor',
-                'name' : 'Floora',
-                'clicks' : 0
+                'name' : 'Floora'
             },
             {
                 'image' : 'img/cat-on-wood.jpg',
                 'alt' : 'A fluffy tabby lying on weathered woodboards',
-                'name' : 'Aslan',
-                'clicks' : 0
+                'name' : 'Aslan'
             },
             {
                 'image' : 'img/cat-on-chair.jpg',
                 'alt' : 'A fluffy Siamese kitty on a wooden chair',
-                'name' : 'Queen Fluffipants',
-                'clicks' : 0
+                'name' : 'Queen Fluffipants'
             },
             {
                 'image' : 'img/cat-behind-window.jpg',
                 'alt' : 'A sneaky grey and white kitty behind a window shade',
-                'name' : 'Le Sneeque',
-                'clicks' : 0
+                'name' : 'Le Sneeque'
             }
         ]
     }
@@ -40,35 +35,45 @@ $(function() {
     for (i = 0; i < cats.cats.length; i++) {
         // Variables for functions
         var cat = cats.cats[i];
+        // Set universal object properties
+        cat.number = i;
+        cat.display = 'none';
+        cat.clicks = 0;
 
-        // Append cats to page
+        // Append list of cats to page
         $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cat.name + '</p></a>');
 
-        // Add cats to main cat div when clicked
+        // Append main cat divs to page
+        $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main" style="display:' + cat.display + '"><img class="catimage" src="' + cat.image + '" alt="' + cat.alt + '"><div class="catname modal">' + cat.name + '</div></div>')
+        // Set style to display none
+        $('.cat-main').css('display', 'none');
+
+        // Show selected cat
         $('#cat' + i).click((function(catCopy) {
             // Closure
             return function() {
-                // Remove a cat if there's already one
-                if ($('.cat-main')) {
-                    $('.cat-main').detach();
-                }
+                // Set property
+                catCopy.display = 'block';
 
-                // Add the new cat
-                $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main"><img class="catimage" src="' + catCopy.image + '" alt="' + catCopy.alt + '"><div class="catname modal">' + catCopy.name + '</div></div>');
+                // Apply property
+                $('#cat-main' + catCopy.number).css('display', catCopy.display);
+                $('#cat-main' + catCopy.number).siblings().css('display', 'none');
+
+                // Display this cat's clicks
+                $('.clicks__count').text('').append(catCopy.clicks)
             }
         })(cat));
 
         // Count clicks
-        $('#cat-container').on("click", $('#cat-main' + i), ((function(catCopy) {
+        $('#cat-main' + i).click((function(catCopy) {
             // Closure
             return function() {
-                console.log(i);
                 // Increment by one each click
                 catCopy.clicks++;
                 // Remove old count and append new count to page
                 $('.clicks__count').text('').append(catCopy.clicks);
             }
-        })(cat)));
+        })(cat));
 
     }
 
