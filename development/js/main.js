@@ -59,16 +59,17 @@ $(function() {
         })(cat));
 
         // Count clicks
-        $('#cat-main' + i).click((function(catCopy) {
+        $('#cat-container').on("click", $('#cat-main' + i), ((function(catCopy) {
             // Closure
             return function() {
-                console.log('why aren\'t these being counted?');
+                console.log(i);
                 // Increment by one each click
                 catCopy.clicks++;
                 // Remove old count and append new count to page
                 $('.clicks__count').text('').append(catCopy.clicks);
             }
-        })(cat));
+        })(cat)));
+
     }
 
 })
