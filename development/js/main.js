@@ -42,24 +42,33 @@ $(function() {
     var octopus = {
         init: function() {
             model.init();
-            viewCatList.init();
-            viewClickableCat.init();
-            viewClickableCat.changeMainCat();
-            viewClickableCat.countClicks();
+            viewList.init();
+            viewCat.init();
+        },
+
+        getCats: function() {
+            return model.cats;
         }
     };
 
-    var viewCatList = {
+    var viewList = {
         // Set up DOM with initial view
         init: function() {
-            for (i = 0; i < model.cats.length; i++) {
+            this.render();
+        },
+
+        render: function() {
+            var cats = octopus.getCats();
+
+            for (i = 0; i < cats.length; i++) {
                 // Append list of cats to page
-                $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + model.cats[i].name + '</a></p>');
+                $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cats[i].name + '</a></p>');
             }
+
         }
     };
 
-    var viewClickableCat = {
+    var viewCat = {
         // Set up DOM with initial view
         init: function() {
             for (i = 0; i < model.cats.length; i++) {
