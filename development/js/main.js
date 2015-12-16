@@ -43,6 +43,9 @@ $(function() {
         init: function() {
             model.init();
             viewCatList.init();
+            viewClickableCat.init();
+            viewClickableCat.changeMainCat();
+            viewClickableCat.countClicks();
         }
     };
 
@@ -60,50 +63,45 @@ $(function() {
         // Set up DOM with initial view
         init: function() {
             for (i = 0; i < model.cats.length; i++) {
+                // Append main cat divs to page
+                $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main" style="display:' + model.cats[i].display + '"><img class="catimage" src="' + model.cats[i].image + '" alt="' + model.cats[i].alt + '"><div class="catname modal">' + model.cats[i].name + '</div></div>')
+
+                // Set style to display none
+                $('.cat-main').css('display', 'none');
+            }
+        },
+
+        // Update cat viewing area
+        changeMainCat: function() {
+            for (i = 0; i < model.cats.length; i++) {
+                $('#cat' + i).click((function(catCopy) {
+                    return function() {
+                        // Set property
+                        catCopy.display = 'block';
+                        // Apply property
+                        $('#cat-main' + catCopy.number).css('display', catCopy.display);
+                        $('#cat-main' + catCopy.number).siblings().css('display', 'none');
+                        // Display this cat's clicks
+                        $('.clicks__count').text('').append(catCopy.clicks)
+                    }
+                })(model.cats[i]));
+            }
+        },
+
+        // Count clicks
+        countClicks: function() {
+            for (i = 0; i < model.cats.length; i++) {
+                $('#cat-main' + i).click((function(catCopy) {
+                    return function() {
+                        // Increment by one each click
+                        catCopy.clicks++;
+                        // Remove old count and append new count to page
+                        $('.clicks__count').text('').append(catCopy.clicks);
+                    }
+                })(model.cats[i]));
             }
         }
     };
-
-    // Append and make cats clickable
-    for (i = 0; i < model.cats.length; i++) {
-        // Variables for functions
-        var cat = model.cats[i];
-
-
-
-        // Append main cat divs to page
-        $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main" style="display:' + cat.display + '"><img class="catimage" src="' + cat.image + '" alt="' + cat.alt + '"><div class="catname modal">' + cat.name + '</div></div>')
-        // Set style to display none
-        $('.cat-main').css('display', 'none');
-
-        // Show selected cat
-        $('#cat' + i).click((function(catCopy) {
-            // Closure
-            return function() {
-                // Set property
-                catCopy.display = 'block';
-
-                // Apply property
-                $('#cat-main' + catCopy.number).css('display', catCopy.display);
-                $('#cat-main' + catCopy.number).siblings().css('display', 'none');
-
-                // Display this cat's clicks
-                $('.clicks__count').text('').append(catCopy.clicks)
-            }
-        })(cat));
-
-        // Count clicks
-        $('#cat-main' + i).click((function(catCopy) {
-            // Closure
-            return function() {
-                // Increment by one each click
-                catCopy.clicks++;
-                // Remove old count and append new count to page
-                $('.clicks__count').text('').append(catCopy.clicks);
-            }
-        })(cat));
-
-    }
 
     octopus.init();
 
