@@ -28,17 +28,35 @@ $(function() {
                 'alt' : 'A sneaky grey and white kitty behind a window shade',
                 'name' : 'Le Sneeque'
             }
-        ]
-    }
+        ],
+        init: function() {
+            for (i = 0; i < model.cats.length; i++) {
+                // Set universal object properties
+                model.cats[i].number = i;
+                model.cats[i].display = 'none';
+                model.cats[i].clicks = 0;
+            }
+        }
+    };
+
+    var octopus = {
+        init: function() {
+            model.init();
+        }
+    };
+
+    var viewCatList = {
+
+    };
+
+    var viewClickableCat = {
+
+    };
 
     // Append and make cats clickable
     for (i = 0; i < model.cats.length; i++) {
         // Variables for functions
         var cat = model.cats[i];
-        // Set universal object properties
-        cat.number = i;
-        cat.display = 'none';
-        cat.clicks = 0;
 
         // Append list of cats to page
         $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cat.name + '</p></a>');
@@ -76,5 +94,7 @@ $(function() {
         })(cat));
 
     }
+
+    octopus.init();
 
 })
