@@ -1,7 +1,7 @@
 $(function() {
 
     //Cat objects
-    var cats = {
+    var model = {
         'cats': [
             {
                 'image' : 'img/cat-on-amp.jpg',
@@ -32,9 +32,9 @@ $(function() {
     }
 
     // Append and make cats clickable
-    for (i = 0; i < cats.cats.length; i++) {
+    for (i = 0; i < model.cats.length; i++) {
         // Variables for functions
-        var cat = cats.cats[i];
+        var cat = model.cats[i];
         // Set universal object properties
         cat.number = i;
         cat.display = 'none';
