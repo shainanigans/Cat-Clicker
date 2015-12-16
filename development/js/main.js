@@ -42,15 +42,26 @@ $(function() {
     var octopus = {
         init: function() {
             model.init();
+            viewCatList.init();
         }
     };
 
     var viewCatList = {
-
+        // Set up DOM with initial view
+        init: function() {
+            for (i = 0; i < model.cats.length; i++) {
+                // Append list of cats to page
+                $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + model.cats[i].name + '</a></p>');
+            }
+        }
     };
 
     var viewClickableCat = {
-
+        // Set up DOM with initial view
+        init: function() {
+            for (i = 0; i < model.cats.length; i++) {
+            }
+        }
     };
 
     // Append and make cats clickable
@@ -58,8 +69,7 @@ $(function() {
         // Variables for functions
         var cat = model.cats[i];
 
-        // Append list of cats to page
-        $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cat.name + '</p></a>');
+
 
         // Append main cat divs to page
         $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main" style="display:' + cat.display + '"><img class="catimage" src="' + cat.image + '" alt="' + cat.alt + '"><div class="catname modal">' + cat.name + '</div></div>')
