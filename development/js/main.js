@@ -97,9 +97,6 @@ $(function() {
                         });
                         $('#catname').text(catCopy.name);
 
-                        // Mark which cat is active for click counting
-                        $('.cat-container').attr('id', 'maincat' + catCopy.number);
-
                         // Render click area
                         $('.clicks__count').text(catCopy.clicks);
 
