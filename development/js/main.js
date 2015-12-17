@@ -2,6 +2,7 @@ $(function() {
 
     //Cat objects
     var model = {
+        currentCat: 0,
         cats: [
             {
                 'image' : 'img/cat-on-amp.jpg',
@@ -82,11 +83,14 @@ $(function() {
             var cats = octopus.getCats();
             var currentCat = octopus.getCurrentCat();
 
+            $('.cat-container').hide();
+
             // Add current cat info to page
             for (i = 0; i < cats.length; i++) {
                 $('#cat' + i).click((function(catCopy) {
                     return function() {
                         // Render cat area
+                        $('.cat-container').show();
                         $('#catimage').attr({
                             src: catCopy.image,
                             alt: catCopy.alt
