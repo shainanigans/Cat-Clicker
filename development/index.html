@@ -46,9 +46,37 @@
                 </div>
 
             </div> <!-- #main -->
-            <aside id="cat-selector" class="flex-item--1-3">
-                <h2>Select a Cat</h2>
+            <aside class="flex-item--1-3">
+
+                <div id="cat-selector">
+                    <h2>Select a Cat</h2>
+                </div>
+
+                <button id="admin-button" class="button--single">Admin</button>
+
+                <div id="admin" class="modal">
+                    <h2>Admin Tools</h2>
+
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" name="name"></input>
+
+                        <label for="src">Image source:</label>
+                        <input type="text" name="src"></input>
+
+                        <label for="alt">Alt text:</label>
+                        <input type="text" name="alt"></input>
+
+                        <label for="clicks">Clicks:</label>
+                        <input type="text" name="clicks"></input>
+                    </form>
+
+                    <button id="submit" class="button--double">Submit</button>
+                    <button id="cancel" class="button--double">Cancel</button>
+                </div>
+
             </aside>
+
         </div> <!-- #main-container -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

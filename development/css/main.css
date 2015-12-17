@@ -28,6 +28,29 @@ a {
 img {
     max-width: 100%;
 }
+form {
+    margin-bottom: 2em;
+}
+input {
+    display: block;
+    width: 100%;
+    margin: .5em 0 1em;
+    padding: .5em;
+    border: none;
+    color: #696562;
+}
+button {
+    background: #b65164;
+    padding: 1em 1.5em;
+    border: none;
+    font-size: 80%;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+button:hover {
+    background: #c7586d;
+    transform: translateY(1px);
+}
 
 /**********************
  *LAYOUT
@@ -81,6 +104,10 @@ img {
 aside {
     background-color: rgba(255, 255, 255, .9);
     padding: 2em;
+}
+.button--single {
+    display: block;
+    margin: 0 auto 2em;
 }
 
 /**********************
