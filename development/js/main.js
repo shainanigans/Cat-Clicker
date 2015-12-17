@@ -71,45 +71,42 @@ $(function() {
     var viewCat = {
         // Set up DOM with initial view
         init: function() {
-            for (i = 0; i < model.cats.length; i++) {
-                // Append main cat divs to page
-                $('#cat-container').append('<div id="cat-main' + i + '" class="cat cat-main" style="display:' + model.cats[i].display + '"><img class="catimage" src="' + model.cats[i].image + '" alt="' + model.cats[i].alt + '"><div class="catname modal">' + model.cats[i].name + '</div></div>')
-
-                // Set style to display none
-                $('.cat-main').css('display', 'none');
-            }
+            this.render();
         },
 
-        // Update cat viewing area
-        changeMainCat: function() {
-            for (i = 0; i < model.cats.length; i++) {
+        render: function() {
+            var cats = octopus.getCats();
+            var img = document.getElementById('catimage');
+            var catName = document.getElementById('catname');
+
+            for (i = 0; i < cats.length; i++) {
                 $('#cat' + i).click((function(catCopy) {
                     return function() {
-                        // Set property
-                        catCopy.display = 'block';
-                        // Apply property
-                        $('#cat-main' + catCopy.number).css('display', catCopy.display);
-                        $('#cat-main' + catCopy.number).siblings().css('display', 'none');
-                        // Display this cat's clicks
-                        $('.clicks__count').text('').append(catCopy.clicks)
-                    }
-                })(model.cats[i]));
-            }
-        },
+                        // Render cat area
+                        img.src = catCopy.image;
+                        img.alt = catCopy.image;
+                        $('#catname').text(catCopy.name);
 
-        // Count clicks
-        countClicks: function() {
-            for (i = 0; i < model.cats.length; i++) {
-                $('#cat-main' + i).click((function(catCopy) {
+                        // Render click area
+                        $('.clicks__count').text(catCopy.clicks);
+                    }
+
+                })(cats[i]));
+            }
+
+            for (i = 0; i < cats.length; i++) {
+                $('#cat-container').click((function(catCopy) {
                     return function() {
                         // Increment by one each click
                         catCopy.clicks++;
+
                         // Remove old count and append new count to page
-                        $('.clicks__count').text('').append(catCopy.clicks);
+                        $('.clicks__count').text(catCopy.clicks);
                     }
-                })(model.cats[i]));
+                })(cats[i]));
             }
         }
+
     };
 
     octopus.init();
