@@ -76,26 +76,29 @@ $(function() {
 
         render: function() {
             var cats = octopus.getCats();
-            var img = document.getElementById('catimage');
-            var catName = document.getElementById('catname');
 
+            // Add current cat info to page
             for (i = 0; i < cats.length; i++) {
                 $('#cat' + i).click((function(catCopy) {
                     return function() {
                         // Render cat area
-                        img.src = catCopy.image;
-                        img.alt = catCopy.image;
+                        $('#catimage').attr({
+                            src: catCopy.image,
+                            alt: catCopy.alt
+                        });
                         $('#catname').text(catCopy.name);
+
+                        // Mark which cat is active for click counting
+                        $('.cat-container').attr('id', 'maincat' + catCopy.number);
 
                         // Render click area
                         $('.clicks__count').text(catCopy.clicks);
                     }
 
                 })(cats[i]));
-            }
 
-            for (i = 0; i < cats.length; i++) {
-                $('#cat-container').click((function(catCopy) {
+                // Count clicks
+                $('.cat-container').click((function(catCopy) {
                     return function() {
                         // Increment by one each click
                         catCopy.clicks++;
