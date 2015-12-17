@@ -2,7 +2,7 @@ $(function() {
 
     //Cat objects
     var model = {
-        'cats': [
+        cats: [
             {
                 'image' : 'img/cat-on-amp.jpg',
                 'alt' : 'An adorable tabby kitty on an amp',
@@ -48,6 +48,10 @@ $(function() {
 
         getCats: function() {
             return model.cats;
+        },
+
+        getCurrentCat: function() {
+            return model.currentCat;
         }
     };
 
@@ -76,6 +80,7 @@ $(function() {
 
         render: function() {
             var cats = octopus.getCats();
+            var currentCat = octopus.getCurrentCat();
 
             // Add current cat info to page
             for (i = 0; i < cats.length; i++) {
@@ -93,21 +98,21 @@ $(function() {
 
                         // Render click area
                         $('.clicks__count').text(catCopy.clicks);
-                    }
 
-                })(cats[i]));
-
-                // Count clicks
-                $('.cat-container').click((function(catCopy) {
-                    return function() {
-                        // Increment by one each click
-                        catCopy.clicks++;
-
-                        // Remove old count and append new count to page
-                        $('.clicks__count').text(catCopy.clicks);
+                        // Mark visible cat as the new currentCat
+                        currentCat = catCopy.number;
                     }
                 })(cats[i]));
             }
+
+            // Count clicks
+            $('.cat-container').click(function() {
+                // Increment by one each click
+                cats[currentCat].clicks++;
+
+                // Remove old count and append new count to page
+                $('.clicks__count').text(cats[currentCat].clicks);
+            });
         }
 
     };
