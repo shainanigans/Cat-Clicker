@@ -53,6 +53,10 @@ $(function() {
 
         getCurrentCat: function() {
             return model.currentCat;
+        },
+
+        setCurrentCat: function(currentCat) {
+            model.currentCat = currentCat;
         }
     };
 
@@ -102,6 +106,12 @@ $(function() {
 
                         // Mark visible cat as the new currentCat
                         currentCat = catCopy.number;
+
+                        // Update model with new currentCat
+                        octopus.setCurrentCat(currentCat);
+
+                        // Render the admin
+                        viewAdmin.render();
                     }
                 })(cats[i]));
             }
@@ -113,9 +123,35 @@ $(function() {
 
                 // Remove old count and append new count to page
                 $('.clicks__count').text(cats[currentCat].clicks);
+
+                // Update value in admin area
+                $('#admin-clicks').val(cats[currentCat].clicks);
             });
+
         }
 
+    };
+
+    var viewAdmin = {
+        init: function() {
+            this.render();
+        },
+
+        render: function() {
+            var cats = octopus.getCats();
+            var currentCat = octopus.getCurrentCat();
+
+            // Set input values
+            $('#admin-name').val(cats[currentCat].name);
+            $('#admin-clicks').val(cats[currentCat].clicks);
+
+            $('#submit').click(function() {
+                cats[currentCat].name = $('#admin-name').val();
+                cats[currentCat].clicks = $('#admin-clicks').val();
+
+                viewCat.render();
+            });
+        }
     };
 
     octopus.init();
