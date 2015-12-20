@@ -2,7 +2,7 @@ $(function() {
 
     //Cat objects
     var model = {
-        currentCat: 0,
+        currentCat: null,
         cats: [
             {
                 'image' : 'img/cat-on-amp.jpg',
@@ -45,6 +45,7 @@ $(function() {
             model.init();
             viewList.init();
             viewCat.init();
+            viewAdmin.init();
         },
 
         getCats: function() {
@@ -74,20 +75,25 @@ $(function() {
                 $('#cat-selector').append('<p id="cat' + i + '"><a href="#">' + cats[i].name + '</a></p>');
             }
 
+        },
+
+        clear: function() {
+            document.getElementById('cat-selector').innerHTML = "";
         }
     };
 
     var viewCat = {
         // Set up DOM with initial view
         init: function() {
+            // Start with cat container hidden
+            $('.cat-container').hide();
+
             this.render();
         },
 
         render: function() {
             var cats = octopus.getCats();
             var currentCat = octopus.getCurrentCat();
-
-            $('.cat-container').hide();
 
             // Add current cat info to page
             for (i = 0; i < cats.length; i++) {
@@ -109,12 +115,14 @@ $(function() {
 
                         // Update model with new currentCat
                         octopus.setCurrentCat(currentCat);
-
-                        // Render the admin
-                        viewAdmin.render();
                     }
                 })(cats[i]));
             }
+
+            // Render the admin when any of the cats are clicked
+            $('#cat-selector p').click(function() {
+                viewAdmin.render();
+            });
 
             // Count clicks
             $('.cat-container').click(function() {
@@ -134,12 +142,20 @@ $(function() {
 
     var viewAdmin = {
         init: function() {
+            // Start with admin area hidden
+            $('#admin').hide();
+
             this.render();
         },
 
         render: function() {
             var cats = octopus.getCats();
             var currentCat = octopus.getCurrentCat();
+
+            // Show the admin area when button clicked
+            $('#admin-button').click(function() {
+                $('#admin').show();
+            });
 
             // Set input values
             $('#admin-name').val(cats[currentCat].name);
@@ -149,7 +165,19 @@ $(function() {
                 cats[currentCat].name = $('#admin-name').val();
                 cats[currentCat].clicks = $('#admin-clicks').val();
 
-                viewCat.render();
+                // Update the counted clicks
+                $('.clicks__count').text(cats[currentCat].clicks);
+
+                viewList.clear();
+                viewList.render();
+
+                // Re-hide the admin area
+                $('#admin').hide();
+            });
+
+            // Hide the admin area if cancelled
+            $('#cancel').click(function() {
+                $('#admin').hide();
             });
         }
     };
