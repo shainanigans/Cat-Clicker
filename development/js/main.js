@@ -77,8 +77,10 @@ $(function() {
 
         },
 
-        clear: function() {
-            document.getElementById('cat-selector').innerHTML = "";
+        update: function(currentCat) {
+            var cats = octopus.getCats();
+
+            $('#cat' + currentCat + ' a').html(cats[currentCat].name);
         }
     };
 
@@ -136,6 +138,16 @@ $(function() {
                 $('#admin-clicks').val(cats[currentCat].clicks);
             });
 
+        },
+
+        update: function(currentCat) {
+            var cats = octopus.getCats();
+
+            // Update clicks
+            $('.clicks__count').text(cats[currentCat].clicks);
+
+            // Update cat name in main cat area
+            $('#catname').html(cats[currentCat].name);
         }
 
     };
@@ -145,17 +157,17 @@ $(function() {
             // Start with admin area hidden
             $('#admin').hide();
 
-            this.render();
+            // Show the admin area when button clicked
+            $('#admin-button').click(function() {
+                $('#admin').show();
+
+                viewAdmin.render();
+            });
         },
 
         render: function() {
             var cats = octopus.getCats();
             var currentCat = octopus.getCurrentCat();
-
-            // Show the admin area when button clicked
-            $('#admin-button').click(function() {
-                $('#admin').show();
-            });
 
             // Set input values
             $('#admin-name').val(cats[currentCat].name);
@@ -166,10 +178,11 @@ $(function() {
                 cats[currentCat].clicks = $('#admin-clicks').val();
 
                 // Update the counted clicks
-                $('.clicks__count').text(cats[currentCat].clicks);
+                //$('.clicks__count').text(cats[currentCat].clicks);
+                viewCat.update(currentCat);
 
-                viewList.clear();
-                viewList.render();
+                // Reset the list of cats
+                viewList.update(currentCat);
 
                 // Re-hide the admin area
                 $('#admin').hide();
